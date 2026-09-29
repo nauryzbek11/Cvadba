@@ -29,3 +29,12 @@
 @media(max-width:600px){.envelope{--letter-rise:-170px}.letter h2{font-size:29px}.letter .text-button{margin-top:6px}}
 @media(max-height:670px){.envelope{--letter-rise:-145px}.letter h2{font-size:25px}.letter .text-button{margin-top:4px;padding-top:5px}}
 @media(prefers-reduced-motion:reduce){.entrance.open .envelope,.entrance.open .seal,.entrance.open .seal:after,.entrance.open .letter:after{animation:none}.letter,.letter>*,.flap,.envelope:before{transition:none}.entrance.open .seal{opacity:0}.entrance.open .letter>*{opacity:1;transform:none}}
+.seal span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  font-size: 21px;
+  letter-spacing: -.6px;
+  line-height: 1;
+}
