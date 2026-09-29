@@ -1,0 +1,57 @@
+﻿<!doctype html>
+<html lang="kk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#491e2b">
+  <meta name="description" content="Біздің үйлену тойымызға арналған арнайы шақыру.">
+  <title>Үйлену тойына шақыру</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="envelope.css">
+  <link rel="stylesheet" href="media.css">
+  <link rel="stylesheet" href="admin.css">
+  <script src="admin.js" defer></script>
+  <script src="wedding.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <div class="site-backdrop" aria-hidden="true"><video id="background-video" autoplay muted loop playsinline preload="metadata" disablepictureinpicture></video></div>
+  <section class="entrance" id="entrance" aria-label="Арнайы шақыру">
+    <header class="entrance-header"><span>WITH LOVE</span><span>СІЗГЕ АРНАЛҒАН</span></header>
+    <div class="intro"><span class="eyebrow">БІР КҮН · БІР МАХАББАТ · БІР ӨМІР</span><h1>Сізге арнайы<br><i>шақыруымыз бар</i></h1><p>Әдемі тарихымыздың бір бөлшегі болыңыз</p></div>
+    <div class="envelope" id="envelope">
+      <div class="envelope-back"></div>
+      <div class="letter" id="letter" inert><span class="eyebrow">ҮЙЛЕНУ ТОЙЫНА ШАҚЫРУ</span><h2 data-names></h2><p data-date></p><button class="text-button" id="enter">ТОЙҒА ӨТУ <span>↗</span></button></div>
+      <div class="envelope-front"></div><div class="flap"></div>
+      <button class="seal" id="seal" aria-label="Шақыру конвертін ашу"><span data-initials>♡</span></button>
+      <span class="envelope-inscription">Сізге, шын жүректен</span>
+    </div>
+    <p class="open-hint" id="open-hint">Ашу үшін экранды немесе мөрді басыңыз <span>↑</span></p>
+    <footer class="entrance-footer"><span>Махаббатпен жасалған</span><span>♡</span><span>Естелікке айналар ерекше күн</span></footer>
+  </section>
+
+  <main id="invitation" hidden>
+    <nav><a href="#home" class="monogram" data-initials>♡</a><a href="#date">Күні</a><a href="#venue">Мекенжай</a><a href="#rsvp">Сауалнама</a></nav>
+    <section class="hero media-section" id="home" data-media="hero"><div class="hero-content"><span class="eyebrow">ҮЙЛЕНУ ТОЙЫНА ШАҚЫРУ</span><p>Біздің ең ерекше күнімізге қош келдіңіз</p><h1 data-names></h1><span class="date-line" data-date></span></div><a class="scroll-cue" href="#welcome">Махаббат тарихы <span>↓</span></a></section>
+    <section class="welcome section reveal" id="welcome"><span class="ornament">❦</span><span class="eyebrow">ШЫН ЖҮРЕКТЕН</span><h2>Құрметті қонақтар!</h2><p>Сіздерді өміріміздегі ең маңызды әрі қуанышты күндердің біріне арнайы шақырамыз. Осы ерекше сәтті бізбен бірге бөлісіп, ақ тілектеріңізді арнасаңыздар, қуанышты боламыз.</p><div class="portrait media-placeholder" data-photo="portrait"><span>Біздің әдемі сәтіміз</span></div><span class="caption">Бірге болған әр сәт — бақыт</span></section>
+    <section class="date-section section reveal" id="date"><span class="eyebrow">БІЗДІҢ ТОЙ</span><h2 id="date-heading">Ерекше күн</h2><p data-date></p><div class="calendar" id="calendar"></div><p id="event-time">Уақыты жақында хабарланады</p><div class="countdown-title">Тойымызға дейін</div><div class="countdown" aria-label="Тойға дейінгі уақыт"><div><strong id="days">—</strong><span>күн</span></div><b>:</b><div><strong id="hours">—</strong><span>сағат</span></div><b>:</b><div><strong id="minutes">—</strong><span>минут</span></div><b>:</b><div><strong id="seconds">—</strong><span>секунд</span></div></div><p class="caption" id="countdown-note">Күніміз белгіленгенде кері санақ басталады</p></section>
+    <section class="story section"><span class="eyebrow reveal">БІЗДІҢ ТАРИХ</span><h2 class="reveal">Бірге басталған<br><i>әдемі тарих…</i></h2><div class="story-frame media-placeholder reveal" data-photo="storyOne"><span>Екі жүрек. Бір әлем.</span></div><div class="story-second reveal"><p>Енді жаңа өмірге<br>бірге қадам басамыз</p><div class="media-placeholder" data-photo="storyTwo"><span>Мәңгілікке бірге</span></div></div></section>
+    <section class="program section"><span class="eyebrow reveal">ОСЫ КҮННІҢ ӘР СӘТІ</span><h2 class="reveal">Той бағдарламасы</h2><p class="caption" id="program-note">Бағдарлама кейін толықтырылады</p><ol class="timeline" id="timeline"></ol></section>
+    <section class="venue section reveal" id="venue"><span class="eyebrow">КЕЗДЕСЕТІН ЖЕРІМІЗ</span><h2>Мекенжайымыз</h2><div class="venue-layout"><div class="venue-photo media-placeholder" data-photo="venue"><span>Ерекше кештің мекені</span></div><div class="venue-details"><span class="ornament">⌂</span><h3 id="venue-name">Той өтетін орын</h3><p id="venue-address">Мекенжай жақында хабарланады</p><p id="venue-time"></p><a class="button" id="map" hidden target="_blank" rel="noopener noreferrer">КАРТАДАН АШУ ↗</a></div></div></section>
+    <section class="interlude media-section" data-media="second"><div class="reveal"><span class="eyebrow">ОСЫ ҚУАНЫШТЫ БІРГЕ БӨЛІСЕЙІК</span><h2>Сіздерді осы ерекше<br>кеште асыға күтеміз</h2><span class="ornament">♡</span></div></section>
+    <section class="rsvp section reveal" id="rsvp"><span class="eyebrow">БІЗ ҮШІН МАҢЫЗДЫ</span><h2>Қонақ сауалнамасы</h2><p>Тойымызға келетініңізді алдын ала хабарласаңыз, біз үшін өте маңызды.</p><form id="rsvp-form"><label for="guest-name">Аты-жөніңіз</label><input id="guest-name" name="name" placeholder="Есіміңізді жазыңыз" autocomplete="name" maxlength="120" required><fieldset><legend>Тойға қатыса аласыз ба?</legend><label class="radio"><input type="radio" name="attendance" value="yes" required checked> Иә, қуана қатысамын</label><label class="radio"><input type="radio" name="attendance" value="no"> Өкінішке қарай, келе алмаймын</label></fieldset><div id="guest-details"><div class="guest-count"><label for="count">Қанша адам болып келесіз?</label><div class="stepper"><button type="button" id="minus" aria-label="Адам санын азайту">−</button><output id="count" aria-live="polite">1</output><button type="button" id="plus" aria-label="Адам санын көбейту">+</button></div></div><div id="companions-wrap" hidden><label for="companions">Қонақтарыңыздың есімі</label><input name="companions" id="companions" maxlength="400" placeholder="Бірге келетін қонақтар"></div></div><button class="button submit" type="submit" id="submit">ЖАУАПТЫ САҚТАУ ↗</button><p class="form-note" id="form-note">Әзірге жауап тек осы құрылғыда сақталады. Ұйымдастырушыларға жіберу кейін қосылады.</p><p id="form-status" role="status"></p></form></section>
+    <footer class="closing media-section" data-media="final"><span class="eyebrow">БІЗДІҢ БАҚЫТЫМЫЗ — СІЗБЕН БІРГЕ</span><h2>Сіздерді асыға күтеміз</h2><p>Ізгі тілекпен,</p><h3 data-names></h3><span data-date></span><div class="closing-bottom">МАХАББАТПЕН <span>♡</span></div></footer>
+    <section class="guest-admin section" id="guest-admin">
+      <span class="eyebrow">ТОЙ ҰЙЫМДАСТЫРУШЫСЫНА</span><h2>Қонақтар тізімі</h2>
+      <p>Жауап берген қонақтардың тізімін көру үшін құпиясөзді енгізіңіз.</p>
+      <form id="admin-login"><label for="admin-password">Құпиясөз</label><input type="password" id="admin-password" autocomplete="current-password" required maxlength="200"><button class="button" type="submit">ТІЗІМДІ АШУ</button></form>
+      <p id="admin-status" role="status" aria-live="polite"></p>
+      <div id="admin-panel" hidden><div class="admin-actions"><button class="button" id="admin-refresh" type="button">ЖАҢАРТУ</button><button class="button" id="admin-download" type="button">CSV ЖҮКТЕУ</button><button class="text-button" id="admin-logout" type="button">ШЫҒУ</button></div><p id="admin-summary"></p><div class="guest-table-wrap"><table class="guest-table"><thead><tr><th>Аты-жөні</th><th>Қатысуы</th><th>Адам саны</th><th>Қонақтар</th><th>Жауап уақыты</th></tr></thead><tbody id="guest-rows"></tbody></table></div></div>
+    </section>
+  </main>
+  <button id="music-toggle" class="music-toggle" aria-label="Музыканы қосу" aria-pressed="false" hidden><span class="vinyl" aria-hidden="true"><span class="vinyl-label">♡</span></span><span class="record-arm" aria-hidden="true"></span></button>
+  <audio id="music" loop preload="auto"></audio>
+  <noscript><p class="noscript">Шақыруды ашу үшін браузерде JavaScript қосыңыз.</p></noscript>
+</body>
+</html>
+
