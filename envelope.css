@@ -1,4 +1,6 @@
 /* A staged opening: wax seal, folding paper, then the invitation text. */
+.seal{padding:3px}
+.seal span{display:flex;align-items:center;justify-content:center;width:100%;white-space:nowrap;font-size:20px;letter-spacing:-1px;line-height:1}
 .envelope{--letter-rise:-195px;perspective:1600px}
 .envelope:before{content:'';position:absolute;inset:-85% -35%;pointer-events:none;background:radial-gradient(ellipse,#f2d9aa38,transparent 65%);opacity:0;transform:scale(.65);transition:opacity 1.3s,transform 2s}
 .entrance.open .envelope:before{opacity:1;transform:scale(1)}

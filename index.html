@@ -6,13 +6,16 @@
   <meta name="theme-color" content="#491e2b">
   <meta name="description" content="Біздің үйлену тойымызға арналған арнайы шақыру.">
   <title>Үйлену тойына шақыру</title>
-  <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="envelope.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@400;500;600&display=swap" media="print" onload="this.media='all'">
+  <link rel="stylesheet" href="styles.css?v=20261003">
+  <link rel="stylesheet" href="envelope.css?v=20261003">
   <link rel="stylesheet" href="media.css">
   <link rel="stylesheet" href="admin.css">
   <script src="admin.js" defer></script>
-  <script src="wedding.js" defer></script>
-  <script src="app.js" defer></script>
+  <script src="wedding.js?v=20261003" defer></script>
+  <script src="app.js?v=20261003" defer></script>
 </head>
 <body>
   <div class="site-backdrop" aria-hidden="true"><video id="background-video" autoplay muted loop playsinline preload="metadata" disablepictureinpicture></video></div>
@@ -50,7 +53,7 @@
     </section>
   </main>
   <button id="music-toggle" class="music-toggle" aria-label="Музыканы қосу" aria-pressed="false" hidden><span class="vinyl" aria-hidden="true"><span class="vinyl-label">♡</span></span><span class="record-arm" aria-hidden="true"></span></button>
-  <audio id="music" loop preload="auto"></audio>
+  <audio id="music" loop preload="none"></audio>
   <noscript><p class="noscript">Шақыруды ашу үшін браузерде JavaScript қосыңыз.</p></noscript>
 </body>
 </html>

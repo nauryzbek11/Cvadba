@@ -11,12 +11,13 @@ document.querySelectorAll('[data-date]').forEach(el => { el.textContent = format
 
 const music = $('#music');
 const musicButton = $('#music-toggle');
-if (config.music) { music.src = config.music; music.volume = 0.45; musicButton.hidden = false; }
+if (config.music) { music.volume = 0.45; musicButton.hidden = false; }
 function syncMusic() { musicButton.setAttribute('aria-pressed', String(!music.paused)); musicButton.setAttribute('aria-label', music.paused ? 'Музыканы қосу' : 'Музыканы тоқтату'); }
 let musicMutedByGuest = false;
 let musicNeedsFirstStart = true;
 async function playMusic() {
   if (!config.music || musicMutedByGuest) return;
+  if (!music.getAttribute('src')) music.src = config.music;
   try {
     await music.play();
     if (musicMutedByGuest) music.pause();
@@ -38,7 +39,6 @@ music.addEventListener('play', syncMusic);
 document.addEventListener('click', tryMusicAutoplay);
 document.addEventListener('touchend', tryMusicAutoplay, { passive: true });
 document.addEventListener('keydown', tryMusicAutoplay);
-tryMusicAutoplay();
 const backgroundVideo = $('#background-video');
 if (config.backgroundVideo) {
   backgroundVideo.muted = true;
@@ -93,7 +93,7 @@ document.querySelectorAll('[data-media]').forEach(el => {
   const key = el.dataset.media;
   if (config.photos[key]) {
     const img = new Image(); img.alt = ''; img.className = 'background-photo'; img.decoding = 'async';
-    img.loading = key === 'hero' ? 'eager' : 'lazy';
+    img.loading = 'lazy';
     img.addEventListener('load', () => { el.classList.add('has-media'); });
     img.addEventListener('error', () => img.remove());
     el.prepend(img); img.src = config.photos[key];
