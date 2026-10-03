@@ -195,6 +195,7 @@ $('#plus').addEventListener('click', () => { guestCount = Math.min(20, guestCoun
 function updateAttendance() { $('#guest-details').hidden = $('input[name="attendance"]:checked').value === 'no'; }
 document.querySelectorAll('input[name="attendance"]').forEach(el => el.addEventListener('change', updateAttendance));
 const storageKey = 'wedding-rsvp-draft';
+let pendingSubmission = null;
 try {
   const saved = JSON.parse(localStorage.getItem(storageKey));
   if (saved) {
@@ -202,6 +203,13 @@ try {
     $(`input[name="attendance"][value="${saved.attendance === 'no' ? 'no' : 'yes'}"]`).checked = true;
     guestCount = Math.max(1, Math.min(20, Number(saved.count) || 1));
     $('#companions').value = saved.companions || '';
+    if (saved.id) {
+      const { name, attendance, count, companions } = saved;
+      pendingSubmission = { fingerprint: JSON.stringify({ name, attendance, count, companions }), id: saved.id };
+      $('#form-status').textContent = saved.sentToServer === true
+        ? 'Рақмет! Жауабыңыз қабылданды 🤍'
+        : 'Жауабыңыз осы құрылғыда сақталды.';
+    }
   }
 } catch { /* Storage is optional. */ }
 updateCount(); updateAttendance();
@@ -210,7 +218,6 @@ if (location.protocol === 'file:' && config.rsvpEndpoint.startsWith('/')) {
   $('#submit').disabled = true;
   $('#form-note').textContent = 'Жауап жіберу үшін шақыруды сайт сілтемесі арқылы ашыңыз.';
 }
-let pendingSubmission = null;
 $('#rsvp-form').addEventListener('submit', async event => {
   event.preventDefault();
   const name = $('#guest-name').value.trim();
@@ -228,7 +235,7 @@ $('#rsvp-form').addEventListener('submit', async event => {
       const result = await response.json();
       if (result.saved !== true) throw new Error('save');
       $('#form-status').textContent = 'Рақмет! Жауабыңыз қабылданды 🤍';
-      try { localStorage.setItem(storageKey, JSON.stringify(payload)); } catch {}
+      try { localStorage.setItem(storageKey, JSON.stringify({ ...payload, sentToServer: true })); } catch {}
     } else {
       localStorage.setItem(storageKey, JSON.stringify(payload));
       $('#form-status').textContent = 'Жауабыңыз осы құрылғыда сақталды. Ұйымдастырушыларға әлі жіберілген жоқ.';

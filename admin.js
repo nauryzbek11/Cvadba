@@ -5,7 +5,7 @@
   function lock() { guests = []; el('guest-rows').replaceChildren(); el('admin-panel').hidden = true; el('admin-login').hidden = false; }
   async function request(url, options = {}) {
     const response = await fetch(url, { ...options, credentials: 'same-origin', cache: 'no-store', signal: AbortSignal.timeout(15000) });
-    if (response.status === 401) { lock(); throw Error('Құпиясөз қате немесе сессия аяқталды.'); }
+    if (response.status === 401) { lock(); const error = Error('Құпиясөз қате немесе сессия аяқталды.'); error.status = 401; throw error; }
     if (response.status === 429) throw Error('Кіру әрекеті тым көп. 15 минуттан кейін қайталаңыз.');
     if (!response.ok) throw Error('Серверге қосылу мүмкін болмады. Қайта көріңіз.');
     return response.json();
@@ -40,5 +40,9 @@
       const url = URL.createObjectURL(new Blob(['\uFEFF' + rows.map(row => row.map(cell).join(';')).join('\r\n')], { type: 'text/csv;charset=utf-8' }));
       const link = document.createElement('a'); link.href = url; link.download = 'guests.csv'; link.click(); setTimeout(() => URL.revokeObjectURL(url), 1000);
     } catch (error) { el('admin-status').textContent = error.message; }
+  });
+  // Restore the private list using the existing HttpOnly session cookie.
+  if (location.protocol !== 'file:') refresh().catch(error => {
+    if (error.status !== 401) el('admin-status').textContent = error.message;
   });
 })();

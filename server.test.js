@@ -4,6 +4,32 @@ const { spawn, spawnSync } = require('node:child_process');
 const fs = require('node:fs');
 const path = require('node:path');
 const { randomUUID } = require('node:crypto');
+const vm = require('node:vm');
+test('reopening the page restores saved guests only with a valid session', async () => {
+  for (const status of [200, 401, 500]) {
+    const elements = new Map();
+    const element = () => ({ hidden: false, textContent: '', children: [], addEventListener() {}, replaceChildren() { this.children = []; }, append(child) { this.children.push(child); } });
+    const get = id => { if (!elements.has(id)) elements.set(id, element()); return elements.get(id); };
+    get('admin-panel').hidden = true;
+    let requests = 0;
+    vm.runInNewContext(fs.readFileSync(path.join(__dirname, 'admin.js'), 'utf8'), {
+      document: { getElementById: get, createElement: element },
+      location: { protocol: 'http:' }, Intl, Date, AbortSignal,
+      fetch: async (url, options) => {
+        requests++;
+        assert.equal(url, '/api/admin/guests');
+        assert.equal(options.credentials, 'same-origin');
+        return { status, ok: status === 200, json: async () => ({ guests: [{ name: 'Guest', attendance: 'yes', count: 2, companions: '', receivedAt: '2026-09-01T12:00:00Z' }] }) };
+      }
+    });
+    await new Promise(resolve => setImmediate(resolve));
+    assert.equal(requests, 1);
+    assert.equal(get('admin-panel').hidden, status !== 200);
+    assert.equal(get('guest-rows').children.length, status === 200 ? 1 : 0);
+    if (status === 401) assert.equal(get('admin-status').textContent, '');
+    if (status === 500) assert.ok(get('admin-status').textContent);
+  }
+});
 test('RSVP validation, persistence, retry deduplication and private data', async () => {
   const dir = fs.mkdtempSync(path.join(__dirname, '.test-data-'));
   let child;
